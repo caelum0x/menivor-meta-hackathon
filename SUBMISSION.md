@@ -81,14 +81,14 @@ Menivor (codename ReelForge internally) is a FastAPI + Celery + Redis + Neon Pos
 
 Ad Studio (`app/domains/adstudio/`) imports a seller's product photos through an SSRF-guarded fetcher, decodes with Pillow (rejecting decompression bombs and non-images), normalizes to a size- and pixel-capped RGB JPEG, content-hashes for de-dup, and stores the result as an owned asset reusable by the rest of the platform's image-to-video generation. Ad Clone (`app/domains/adclone/`) resolves a competitor's ad link, downloads it, runs keyframe vision analysis (face-size framing, frame-to-frame camera-move via similarity transform, OCR, transcript), produces a heuristic-or-LLM-refined creative brief, and generates per-engine render plans under an explicit USD cost cap before any paid render runs. The test suite covering this (`tests/reelforge/`) is 463 files and roughly 5,882 test functions, run via `make -f Makefile.reelforge test`.
 
-Links: live product — https://menivor.com. Repository — https://github.com/caelum0x/videogen (also published as https://github.com/caelum0x/menivor).
+Links: live product — https://menivor.com. **Hackathon repo (submit this one, it's the public, judge-auditable one)** — https://github.com/caelum0x/menivor-meta-hackathon — see `HACKATHON.md` there, tag `pre-hackathon-window` marks the exact commit boundary separating pre-existing work from this hackathon's Oct 27 – Nov 4 build-window commits (`git log pre-hackathon-window..main`). Menivor's full production codebase (`github.com/caelum0x/videogen`) stays private — too large and commercially sensitive to publish wholesale; the hackathon repo is a genuine, runnable extraction of only the Meta Model API adapter code, not a stub.
 
 ---
 
 ## Owner-only steps (not done here — needs real login/payment info)
 
 1. Create/log into the Cerebral Valley account used to submit (https://cerebralvalley.ai/e/meta-ai-developer-hackathon) — login/2FA.
-2. Paste the three sections above (track, project idea, technical skill) plus the two links into the actual application form fields.
+2. Paste the three sections above (track, project idea, technical skill) plus the links into the actual application form fields. **Repo field must be `https://github.com/caelum0x/menivor-meta-hackathon` — never `videogen`, which is private and unreachable by judges.**
 3. Add your personal GitHub/LinkedIn profile links if the form asks for an individual profile rather than the repo URL — pick the identity you want judges to see.
 4. Submit before 2026-10-25 11:59pm ET. Spots are first-come up to 20,000 — submit as soon as the pasted content is reviewed, do not wait for the deadline.
 5. If accepted, any Meta Model API account/key setup for the 2026-10-26 to 2026-11-04 build window is an owner sign-up step (real credentials/payment).

@@ -36,11 +36,15 @@ existing provider-routing architecture, plus their real test suite.
 ## Why this design
 
 Both adapters fail closed with a clearly-labeled `KlingError(kind="auth")` when
-`MODEL_API_KEY` is unset — there is no real Meta Model API key anywhere in this
-environment yet (see "Hackathon window" below). Nothing here is mocked or
-faked: the HTTP protocol, request/response shapes, pricing, and error taxonomy
-are all the real, documented Meta Model API wire format. The moment a real key
-is set, `muse_generate_image()` and `sam_segment_image()` make real calls.
+`MODEL_API_KEY` is unset, and this repo intentionally never commits a real key
+(see `HACKATHON.md` for the current status of real calls/proof artifacts).
+Nothing here is mocked or faked: the HTTP protocol, request/response shapes,
+pricing, and error taxonomy are all the real, documented Meta Model API wire
+format. The moment a real key is set, `muse_generate_image()` and
+`sam_segment_image()` make real calls.
+
+See **[`HACKATHON.md`](./HACKATHON.md)** for the exact commit-range boundary
+between pre-existing work and this hackathon's Oct 27 – Nov 4 build window.
 
 ## Verify it yourself
 
@@ -51,25 +55,12 @@ python3 -m pytest tests/ -q
 # 27 passed, 2 skipped
 ```
 
-## Hackathon window — what's pre-existing vs. built during Oct 27–Nov 4
+## Hackathon window separation
 
-Per the hackathon's rule that pre-existing product work must be clearly
-separated from hackathon-window work:
-
-- **Built ahead of the official Oct 27–Nov 4 build window** (2026-10-23, while
-  Meta's Model API docs were being evaluated against Menivor's existing
-  11-cloud-provider routing architecture, ahead of hackathon acceptance): the
-  two adapters, their wiring into the registry/media-catalog/gateway dispatch,
-  and this test suite — i.e., everything in this repo's `app/` directory.
-- **Pre-existing, unrelated to this hackathon**: the rest of Menivor (menivor.com) —
-  billing, publishing, the 11 other video/image providers, mobile/desktop
-  clients, Megaphone, etc.
-- **Still to happen inside the Oct 27–Nov 4 window** (blocked on the owner
-  claiming Meta Model API credits — a card-on-file step, not something an
-  agent can do): the first real authenticated call against
-  `api.meta.ai` with a live `MODEL_API_KEY`, and recording the demo video
-  showing that real call inside Menivor's actual Ad Studio/Ad Clone product
-  flow.
+See **[`HACKATHON.md`](./HACKATHON.md)** — it pins the exact `git tag` boundary
+(`pre-hackathon-window`) between what predates the Oct 27–Nov 4 build window
+(this repo's two initial commits, both 2026-10-26) and what's genuinely built
+during it, and tracks window-work as it lands.
 
 ## Links
 

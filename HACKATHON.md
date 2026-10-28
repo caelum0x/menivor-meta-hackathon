@@ -43,15 +43,20 @@ Tracked here as it lands, each as its own commit *after* the
 show the real, current window diff — no manual bookkeeping required beyond
 keeping commits in this repo:
 
-- The first real authenticated call against `api.meta.ai` using the owner's
-  claimed `MODEL_API_KEY` (credits were claimed and the key went live
-  2026-10-26, i.e. just before the window — the **first live call through
-  this repo's own adapter code**, as opposed to the private production repo,
-  still needs to happen inside the window and be committed here as evidence).
-- Real before/after proof artifacts from that call (SAM 3.1 cutout + Muse
-  Image generation), committed into this repo rather than left in `/tmp`.
+- **DONE 2026-10-28**: the first real authenticated call against `api.meta.ai`
+  through this repo's own adapter code (not the private production repo) —
+  `muse_generate_image()` returned a real `200` with a genuine generated
+  image, and `sam_segment_image()` returned a real `200` with a genuine
+  detected box on that same image. See `proof/PROOF.md` for the exact calls
+  and results.
+- **DONE 2026-10-28**: real before/after proof artifacts committed into this
+  repo (`proof/muse-image-generation-output.webp`,
+  `proof/sam-cutout-sneaker-before.jpg`, `proof/sam-cutout-sneaker-after.jpg`)
+  rather than left in `/tmp`.
 - The 3-minute demo video recording itself (per `DEMO-SCRIPT.md`) and its
-  published link.
+  published link — still open, needs the owner-approved prod test user +
+  an actual screen recording (owner-only, unchanged from the 2026-10-26/27
+  entries in `plans/menivor.md`).
 - Any adapter bug fixes discovered while producing the above (e.g. the kind of
   SAM grounding-phrase issue already found and fixed in the private repo on
   2026-10-26 — if an equivalent fix is needed here, it lands as its own

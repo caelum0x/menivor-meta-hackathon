@@ -53,9 +53,9 @@ would route a `meta/muse-image-1.0` request through.
 
 ## Why Menivor replaces Scribase for this entry
 
-Scribase (`/Users/arhansubasi/products/supabase-plus-clone`) is backend infra — Postgres/auth/storage/deploy for agents and app teams. It has no real surface for Muse Image/Spark/Wonder (generative image/video) or SAM 3.1 (segmentation/vision); forcing a fit would mean bolting on a demo feature nobody at Scribase would ship.
+Scribase (backend infra — Postgres/auth/storage/deploy for agents and app teams) has no real surface for Muse Image/Spark/Wonder (generative image/video) or SAM 3.1 (segmentation/vision); forcing a fit would mean bolting on a demo feature nobody at Scribase would ship.
 
-Menivor (`/Users/arhansubasi/products/videogen`, live at menivor.com, repo `github.com/caelum0x/videogen`) is a production AI video-ad/UGC generation platform. It already runs a real provider-adapter registry with 11+ live cloud generation models (Kling, Luma, MiniMax/Hailuo, Runway Gen-4, Veo, Wan, Suno, HeyGen, SadTalker, ElevenLabs) plus a 4-provider image adapter (Stability, Black Forest Labs/Flux, Ideogram, Recraft), and two ad-creative product surfaces — Ad Studio and Ad Clone — that are the exact slot Muse Image/Spark/Wonder and SAM 3.1 drop into. This is the better pick. Draft below is for Menivor.
+Menivor (live at menivor.com, production repo `github.com/caelum0x/videogen`) is a production AI video-ad/UGC generation platform. It already runs a real provider-adapter registry with 11+ live cloud generation models (Kling, Luma, MiniMax/Hailuo, Runway Gen-4, Veo, Wan, Suno, HeyGen, SadTalker, ElevenLabs) plus a 4-provider image adapter (Stability, Black Forest Labs/Flux, Ideogram, Recraft), and two ad-creative product surfaces — Ad Studio and Ad Clone — that are the exact slot Muse Image/Spark/Wonder and SAM 3.1 drop into. This is the better pick. Draft below is for Menivor.
 
 ---
 

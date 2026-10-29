@@ -94,9 +94,19 @@ Built on Meta's Model API — and built to grow with it."
 
 ## Still blocked on (owner-only, not something an agent can do)
 
-A real recording of 0:50–2:20 needs a live `MODEL_API_KEY` set in Menivor's
-production environment — i.e., the owner must first claim the Meta API
-credits (card-on-file). Until then, this script can be rehearsed against the
-adapters' own fail-closed error message ("Meta Model API key not configured")
-to time the cuts, but the actual before/after crop and generated image shots
-cannot be captured for real.
+**Updated 2026-10-29: the API-key blocker below is cleared.** A live
+`MODEL_API_KEY` has been set in Menivor's production environment since
+2026-10-26, and real before/after shots already exist — see
+`proof/muse-image-generation-output.webp` and
+`proof/sam-cutout-sneaker-before.jpg` / `sam-cutout-sneaker-after.jpg` in this
+repo, produced through this repo's own adapter code and re-verified live
+again on 2026-10-29 against a second product (a mug). The 0:50–2:20 segment
+can be recorded for real right now, either by triggering a fresh live call
+on camera or by screen-capturing/narrating over the already-committed proof
+images if a fresh on-camera call isn't available at record time.
+
+The only remaining blocker is the literal screen recording itself: an
+owner-approved prod test user to click through Ad Studio's real product-photo
+import and an Ad Clone/`/images` generation on menivor.com, then the actual
+3-minute narrated screen recording + upload + link, pasted into the Cerebral
+Valley submission form. No code or infra blocker remains.

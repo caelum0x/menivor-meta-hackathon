@@ -1,0 +1,20 @@
+{
+  "muse_generate": {
+    "prompt": "A clean studio product photo of a single red sneaker on a white background, centered, soft shadow",
+    "elapsed_s": 8.53,
+    "result_kind": "data"
+  },
+  "sam_segment": {
+    "phrase": "the sneaker",
+    "elapsed_s": 2.67,
+    "box": {
+      "x1": 245,
+      "y1": 503,
+      "x2": 1354,
+      "y2": 1169,
+      "frame_w": 1600,
+      "frame_h": 1600
+    },
+    "request_id": null
+  }
+}

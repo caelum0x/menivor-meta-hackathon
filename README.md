@@ -62,7 +62,22 @@ See **[`HACKATHON.md`](./HACKATHON.md)** — it pins the exact `git tag` boundar
 (this repo's two initial commits, both 2026-10-26) and what's genuinely built
 during it, and tracks window-work as it lands.
 
+## What's in this repo (continued)
+
+- `app/domains/adstudio/images.py` — the real SAM 3.1 *integration call site*
+  (`phrase_from_title`, the cutout crop math), not just the bare adapter —
+  trimmed from the private production file (storage/fetch layer removed,
+  nothing simplified). Shows the adapter actually wired into a feature.
+
 ## Links
 
 - Live product: https://menivor.com
-- Production repository (private): github.com/caelum0x/videogen
+- **Open-source core** (real, separately maintained): github.com/caelum0x/menivor
+  — the FastAPI pipeline + Next.js/Expo/Rust clients Menivor is built on top
+  of (MIT, built on MoneyPrinterTurbo). This is a genuinely different repo
+  from this hackathon extraction: it's the general screen-recording →
+  captioned UGC/avatar video core, MIT-licensed and runnable standalone,
+  whereas this repo is specifically the two new Meta Model API adapters plus
+  their real call site. Neither this repo nor the OSS core expose the private
+  commercial monorepo's billing/multi-tenant/schema internals.
+- Production repository (private, commercial): github.com/caelum0x/videogen

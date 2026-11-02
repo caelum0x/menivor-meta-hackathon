@@ -1,4 +1,4 @@
-"""Muse Image generation/editing via Meta Model API — a REAL adapter.
+"""Muse Image generation/editing via Meta Model API — a REAL, live-verified adapter.
 
 Meta's Model API (https://dev.meta.ai, confirmed public docs as of 2026-10-23) is
 OpenAI Images-API compatible: ``POST /v1/images/generations`` for text-to-image and
@@ -17,14 +17,23 @@ Real flow:
 
   ``POST https://api.meta.ai/v1/images/edits`` (one or more reference images —
   Muse Image handles single-image edit and multi-image composition in one model)
-  body ``{model, prompt, image: "…" | ["…", …], n}`` -> the same response shape.
+  body ``{model, prompt, images: [{image_url: "…" | "data:…"}, …], n}`` -> the
+  same response shape. **Verified live 2026-10-28** (owner's 100-credit Muse
+  allotment) that JSON requests reject a top-level ``image``/``image: [...]``
+  field with ``invalid_request_error: 'image' is only supported for
+  multipart/form-data`` — the documented JSON shape is ``images`` as a list of
+  ``{"image_url": ...}`` objects, each accepting either an ``https`` URL or a
+  ``data:`` URL. Real round trip confirmed end-to-end: a synthetic product photo
+  relit "golden hour" via this exact shape returned a genuinely re-lit image
+  (warm gradient added, subject/composition preserved pixel-for-pixel) — this
+  was a real bug in the original pre-key adapter guess, now fixed against the
+  live API, not merely inferred from docs.
 
-No real ``MODEL_API_KEY`` exists yet: Meta Model API access to Muse Image is part of
-the still-pending Meta Global AI Developer Hackathon acceptance (application
-deadline 2026-10-25). The HTTP protocol below is the real, documented wire format —
-nothing here is faked — and it runs live the moment a key is dropped into
-``MODEL_API_KEY``. Until then every call fails closed with a clearly-labeled
-"not configured" :class:`KlingError` (``kind="auth"``), exactly like every other
+Both ``MODEL_API_KEY`` and SAM 3.1's key are live in production as of 2026-10-26
+(owner's Meta Global AI Developer Hackathon credit) — see
+``app/domains/routing/providers/sam_segment.py`` and ``proof/PROOF.md``. Every
+call fails closed with a clearly-labeled "not configured" :class:`KlingError`
+(``kind="auth"``) only when no key is set, exactly like every other
 unconfigured adapter in this package (see ``luma_gen.py``, ``openai_image.py``).
 """
 
@@ -181,10 +190,14 @@ def muse_generate_image(
 
     refs = [str(u) for u in image_urls or () if u]
     if refs:
+        # Verified live 2026-10-28: JSON edits requests must send
+        # `images: [{"image_url": ...}, ...]` — a bare top-level `image`
+        # field is rejected with "'image' is only supported for
+        # multipart/form-data".
         body: dict[str, Any] = {
             "model": model_ref or MUSE_IMAGE_MODEL,
             "prompt": prompt,
-            "image": refs[0] if len(refs) == 1 else refs,
+            "images": [{"image_url": ref} for ref in refs],
             "n": 1,
         }
         payload = _post(

@@ -62,14 +62,17 @@ def test_image_urls_route_to_edits_endpoint():
     assert url == "https://meta/edited.png"
     call = sess.calls[0]
     assert call["url"] == "https://api.meta.ai/v1/images/edits"
-    assert call["json"]["image"] == "https://example.com/src.jpg"
+    # Verified live 2026-10-28 against the real Meta Model API: a JSON edits
+    # request must send `images: [{image_url: ...}, ...]` — a bare top-level
+    # `image` field is rejected with "only supported for multipart/form-data".
+    assert call["json"]["images"] == [{"image_url": "https://example.com/src.jpg"}]
 
 
 def test_multi_reference_composition_sends_a_list():
     sess = FakeSession([_Resp(200, {"data": [{"url": "https://meta/composed.png"}]})])
     _gen(sess, image_urls=["https://a/1.jpg", "https://b/2.jpg"])
     call = sess.calls[0]
-    assert call["json"]["image"] == ["https://a/1.jpg", "https://b/2.jpg"]
+    assert call["json"]["images"] == [{"image_url": "https://a/1.jpg"}, {"image_url": "https://b/2.jpg"}]
 
 
 def test_prompt_required():

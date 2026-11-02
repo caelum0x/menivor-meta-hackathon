@@ -36,9 +36,15 @@ Real flow (per the documented request/response shape):
   raster bits is a follow-up once this runs against a live key (tracked in the
   docstring of :func:`decode_boxes`, not silently pretended to be pixel-exact).
 
-No real ``MODEL_API_KEY``/``SAM_API_KEY`` exists yet (hackathon-exclusive access,
-pending acceptance). Every call fails closed with a documented "not configured"
-:class:`KlingError` (``kind="auth"``) when no key is set — never a faked response.
+The key is live: ``MODEL_API_KEY`` (covering SAM 3.1 and every other Meta
+Model API service) has been active in production since 2026-10-26 (owner's
+Meta Global AI Developer Hackathon credit; see ``proof/PROOF.md``), and this
+adapter's grounding + box-decode path is verified end-to-end against the real
+API (2026-10-28): a real ``200`` detection — ``SamBox(x1=142, y1=563, x2=1459,
+y2=1299)`` — was returned for the committed ``proof/muse-image-generation-output.webp``
+and cropped in ``proof/sam-cutout-sneaker-after.jpg``. Every call still fails
+closed with a documented "not configured" :class:`KlingError`
+(``kind="auth"``) when no key is set — never a faked response.
 """
 
 from __future__ import annotations

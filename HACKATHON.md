@@ -61,6 +61,18 @@ keeping commits in this repo:
   SAM grounding-phrase issue already found and fixed in the private repo on
   2026-10-26 — if an equivalent fix is needed here, it lands as its own
   dated commit, not folded into the pre-window extraction).
+- **DONE 2026-11-02**: mirrored the live-verified Muse Image **edits** wire
+  fix into this repo. The pre-window extraction guessed a top-level
+  ``image`` string/list field for ``POST /v1/images/edits``; the real Meta
+  Model API rejects that JSON body with ``'image' is only supported for
+  multipart/form-data`` (proven live in the private production repo on
+  2026-10-28). The documented JSON shape is ``images`` as a list of
+  ``{"image_url": ...}`` objects — now the only shape this repo's
+  ``muse_generate_image(image_urls=[...])`` sends, for single- and
+  multi-reference edits alike, with the test suite asserting that exact
+  body. Also de-staled both adapter docstrings (the key has been live since
+  2026-10-26, per ``proof/PROOF.md`` — no "pending acceptance" claims
+  remain). Own dated commit after the ``pre-hackathon-window`` tag.
 
 ## Why the production codebase isn't in this repo
 
